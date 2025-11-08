@@ -1,104 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Открываем Instagram...</title>
+    <title>severinova_fashion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-        function detectOS() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            
-            // iOS detection
-            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                return 'ios';
-            }
-            // Android detection
-            if (/android/i.test(userAgent)) {
-                return 'android';
-            }
-            return 'other';
+        // Немедленная попытка открыть приложение
+        window.location.href = "instagram://user?username=severinova_fashion";
+        
+        // Если не получилось, показываем кнопку
+        setTimeout(function() {
+            document.getElementById('fallback').style.display = 'block';
+        }, 1000);
+        
+        function openInApp() {
+            window.location.href = "instagram://user?username=severinova_fashion";
+            setTimeout(function() {
+                window.location.href = "https://www.instagram.com/severinova_fashion/";
+            }, 500);
         }
-
-        function openInstagram() {
-            const os = detectOS();
-            
-            if (os === 'ios') {
-                // Для iOS
-                window.location.href = 'instagram://user?username=severinova_fashion';
-                setTimeout(function() {
-                    window.location.href = 'https://apps.apple.com/app/instagram/id389801252';
-                }, 500);
-            } else if (os === 'android') {
-                // Для Android
-                window.location.href = 'intent://instagram.com/_u/severinova_fashion/#Intent;package=com.instagram.android;scheme=https;end';
-                setTimeout(function() {
-                    window.location.href = 'https://play.google.com/store/apps/details?id=com.instagram.android';
-                }, 500);
-            } else {
-                // Для других устройств
-                window.location.href = 'https://www.instagram.com/severinova_fashion/';
-            }
-        }
-
-        // Запускаем сразу при загрузке
-        window.onload = openInstagram;
     </script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(135deg, #E1306C 0%, #C13584 100%);
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fafafa;
         }
         .container {
-            max-width: 400px;
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
         }
-        .btn {
-            display: inline-block;
-            margin: 10px;
-            padding: 12px 24px;
-            background: white;
+        .open-btn {
+            background: #E1306C;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+        .web-link {
             color: #E1306C;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: transform 0.3s;
-        }
-        .btn:hover {
-            transform: scale(1.05);
-        }
-        .spinner {
-            border: 4px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top: 4px solid white;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            display: block;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="spinner"></div>
-        <h2>Открываем Instagram...</h2>
-        <p>Если приложение не открылось автоматически:</p>
-        <a href="instagram://user?username=severinova_fashion" class="btn">Открыть в приложении</a>
-        <a href="https://www.instagram.com/severinova_fashion/" class="btn">Открыть в браузере</a>
+    <div class="container" id="fallback">
+        <h2>Открыть Instagram</h2>
+        <button class="open-btn" onclick="openInApp()">Открыть в приложении</button>
+        <a href="https://www.instagram.com/severinova_fashion/" class="web-link">Открыть в браузере</a>
     </div>
-    
-    <script>
-        // Дублируем вызов для надежности
-        openInstagram();
-    </script>
 </body>
 </html>
