@@ -1,20 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirecting...</title>
+    <title>Открываем Instagram...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-        // Сразу пытаемся открыть приложение
-        window.location.href = "instagram://user?username=severinova_fashion";
-        
-        // Если не получилось, через 1 секунду открываем веб-версию
-        setTimeout(function() {
-            window.location.href = "https://www.instagram.com/severinova_fashion/";
-        }, 1000);
+        function detectOS() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            // iOS detection
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                return 'ios';
+            }
+            // Android detection
+            if (/android/i.test(userAgent)) {
+                return 'android';
+            }
+            return 'other';
+        }
+
+        function openInstagram() {
+            const os = detectOS();
+            
+            if (os === 'ios') {
+                // Для iOS
+                window.location.href = 'instagram://user?username=severinova_fashion';
+                setTimeout(function() {
+                    window.location.href = 'https://apps.apple.com/app/instagram/id389801252';
+                }, 500);
+            } else if (os === 'android') {
+                // Для Android
+                window.location.href = 'intent://instagram.com/_u/severinova_fashion/#Intent;package=com.instagram.android;scheme=https;end';
+                setTimeout(function() {
+                    window.location.href = 'https://play.google.com/store/apps/details?id=com.instagram.android';
+                }, 500);
+            } else {
+                // Для других устройств
+                window.location.href = 'https://www.instagram.com/severinova_fashion/';
+            }
+        }
+
+        // Запускаем сразу при загрузке
+        window.onload = openInstagram;
     </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #E1306C 0%, #C13584 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 400px;
+        }
+        .btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 24px;
+            background: white;
+            color: #E1306C;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-    <noscript>
-        <p>Перейдите в <a href="https://www.instagram.com/severinova_fashion/">Instagram</a></p>
-    </noscript>
+    <div class="container">
+        <div class="spinner"></div>
+        <h2>Открываем Instagram...</h2>
+        <p>Если приложение не открылось автоматически:</p>
+        <a href="instagram://user?username=severinova_fashion" class="btn">Открыть в приложении</a>
+        <a href="https://www.instagram.com/severinova_fashion/" class="btn">Открыть в браузере</a>
+    </div>
+    
+    <script>
+        // Дублируем вызов для надежности
+        openInstagram();
+    </script>
 </body>
 </html>
