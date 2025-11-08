@@ -4,61 +4,43 @@
     <title>severinova_fashion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-        function openInstagram() {
-            // Пытаемся открыть приложение Instagram
-            const appOpened = Date.now();
+        let appTimeout;
+        
+        function openInApp() {
+            // Сохраняем время перед попыткой открыть приложение
+            const startTime = Date.now();
+            
+            // Пытаемся открыть приложение
             window.location.href = "instagram://user?username=severinova_fashion";
             
-            // Проверяем, остались ли мы на странице через 500ms
+            // Устанавливаем таймер для проверки
+            appTimeout = setTimeout(function() {
+                // Если прошло больше 1 секунды, значит приложение не открылось
+                // Открываем веб-версию
+                window.location.href = "https://www.instagram.com/severinova_fashion/";
+            }, 1000);
+            
+            // Слушаем событие потери фокуса (приложение открылось)
+            window.addEventListener('blur', function() {
+                clearTimeout(appTimeout);
+            });
+            
+            // Для iOS - дополнительная проверка
             setTimeout(function() {
-                if (Date.now() - appOpened < 1000) {
-                    // Если все еще на странице, открываем веб-версию
+                if (document.hasFocus()) {
+                    // Страница все еще в фокусе - приложение не открылось
                     window.location.href = "https://www.instagram.com/severinova_fashion/";
                 }
             }, 500);
         }
         
-        // Запускаем сразу при загрузке
-        window.onload = openInstagram;
+        // Запускаем автоматически
+        window.onload = openInApp;
     </script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #fafafa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            text-align: center;
-            padding: 40px 20px;
-        }
-        .btn {
-            background: #E1306C;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 10px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .loading {
-            color: #666;
-            font-size: 18px;
-        }
-    </style>
 </head>
-<body>
-    <div class="container">
-        <p class="loading">Открываем Instagram...</p>
-        <a href="instagram://user?username=severinova_fashion" class="btn">Открыть в приложении</a>
-        <a href="https://www.instagram.com/severinova_fashion/" class="btn">Открыть в браузере</a>
-    </div>
+<body style="margin:0;padding:20px;text-align:center;font-family:Arial,sans-serif;">
+    <p>Перенаправление в Instagram...</p>
+    <p><a href="instagram://user?username=severinova_fashion">Открыть в приложении</a></p>
+    <p><a href="https://www.instagram.com/severinova_fashion/">Открыть в браузере</a></p>
 </body>
 </html>
