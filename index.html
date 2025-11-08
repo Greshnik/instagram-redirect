@@ -4,20 +4,22 @@
     <title>severinova_fashion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
-        // Немедленная попытка открыть приложение
-        window.location.href = "instagram://user?username=severinova_fashion";
-        
-        // Если не получилось, показываем кнопку
-        setTimeout(function() {
-            document.getElementById('fallback').style.display = 'block';
-        }, 1000);
-        
-        function openInApp() {
+        function openInstagram() {
+            // Пытаемся открыть приложение Instagram
+            const appOpened = Date.now();
             window.location.href = "instagram://user?username=severinova_fashion";
+            
+            // Проверяем, остались ли мы на странице через 500ms
             setTimeout(function() {
-                window.location.href = "https://www.instagram.com/severinova_fashion/";
+                if (Date.now() - appOpened < 1000) {
+                    // Если все еще на странице, открываем веб-версию
+                    window.location.href = "https://www.instagram.com/severinova_fashion/";
+                }
             }, 500);
         }
+        
+        // Запускаем сразу при загрузке
+        window.onload = openInstagram;
     </script>
     <style>
         body {
@@ -25,35 +27,38 @@
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             background: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
         .container {
-            display: none;
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
         }
-        .open-btn {
+        .btn {
             background: #E1306C;
             color: white;
             border: none;
             padding: 15px 30px;
             border-radius: 10px;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
-            margin: 20px 0;
-        }
-        .web-link {
-            color: #E1306C;
+            margin: 10px;
             text-decoration: none;
-            display: block;
-            margin-top: 20px;
+            display: inline-block;
+        }
+        .loading {
+            color: #666;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="fallback">
-        <h2>Открыть Instagram</h2>
-        <button class="open-btn" onclick="openInApp()">Открыть в приложении</button>
-        <a href="https://www.instagram.com/severinova_fashion/" class="web-link">Открыть в браузере</a>
+    <div class="container">
+        <p class="loading">Открываем Instagram...</p>
+        <a href="instagram://user?username=severinova_fashion" class="btn">Открыть в приложении</a>
+        <a href="https://www.instagram.com/severinova_fashion/" class="btn">Открыть в браузере</a>
     </div>
 </body>
 </html>
