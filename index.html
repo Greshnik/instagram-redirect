@@ -1,118 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>severinova_fashion</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .dialog {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            width: 90%;
-            max-width: 300px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-        .app-option {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            margin: 10px 0;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #333;
-            transition: background 0.2s;
-        }
-        .app-option:hover {
-            background: #f5f5f5;
-        }
-        .app-icon {
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-        .instagram {
-            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
-        }
-        .browser {
-            background: #4285F4;
-        }
-        .app-info {
-            text-align: left;
-            flex-grow: 1;
-        }
-        .app-name {
-            font-weight: 600;
-        }
-        .app-desc {
-            font-size: 12px;
-            color: #666;
-        }
-        .cancel-btn {
-            margin-top: 15px;
-            padding: 10px;
-            background: none;
-            border: none;
-            color: #007AFF;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
-        }
-    </style>
+    <script>
+        // Немедленный редирект в приложение
+        window.location.href = "instagram://user?username=severinova_fashion";
+        setTimeout(() => {
+            window.location.href = "https://www.instagram.com/severinova_fashion/";
+        }, 500);
+    </script>
 </head>
 <body>
-    <div class="dialog">
-        <h3 style="margin: 0 0 15px 0;">Открыть Instagram</h3>
-        <p style="margin: 0 0 20px 0; color: #666; font-size: 14px;">Выберите способ открытия</p>
-        
-        <a href="instagram://user?username=severinova_fashion" class="app-option">
-            <div class="app-icon instagram">IG</div>
-            <div class="app-info">
-                <div class="app-name">Приложение Instagram</div>
-                <div class="app-desc">Быстрый доступ</div>
-            </div>
-        </a>
-        
-        <a href="https://www.instagram.com/severinova_fashion/" class="app-option">
-            <div class="app-icon browser">WB</div>
-            <div class="app-info">
-                <div class="app-name">Веб-браузер</div>
-                <div class="app-desc">Без установки приложения</div>
-            </div>
-        </a>
-        
-        <button class="cancel-btn" onclick="window.close()">Отмена</button>
-    </div>
-
-    <script>
-        // Автоматически фокусируем на диалоге
-        document.addEventListener('DOMContentLoaded', function() {
-            // Можно добавить автоматическое открытие приложения через 3 секунды, 
-            // если пользователь ничего не выбрал
-            setTimeout(function() {
-                // Если за 3 секунды пользователь не кликнул, предлагаем открыть в приложении
-                if (!document.querySelector('a:focus')) {
-                    // Можно добавить логику для автоматического редиректа
-                }
-            }, 3000);
-        });
-    </script>
+    <p>Redirecting to Instagram...</p>
 </body>
 </html>
