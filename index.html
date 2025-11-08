@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirect to Instagram</title>
-    <meta http-equiv="refresh" content="0; url=https://www.instagram.com/severinova_fashion/">
+    <title>Redirecting...</title>
     <script>
-        window.location.href = "https://www.instagram.com/severinova_fashion/";
+        // Сразу пытаемся открыть приложение
+        window.location.href = "instagram://user?username=severinova_fashion";
+        
+        // Если не получилось, через 1 секунду открываем веб-версию
+        setTimeout(function() {
+            window.location.href = "https://www.instagram.com/severinova_fashion/";
+        }, 1000);
     </script>
 </head>
 <body>
-    <p>Перенаправление на <a href="https://www.instagram.com/severinova_fashion/">Instagram severinova_fashion</a>...</p>
+    <noscript>
+        <p>Перейдите в <a href="https://www.instagram.com/severinova_fashion/">Instagram</a></p>
+    </noscript>
 </body>
 </html>
